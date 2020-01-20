@@ -1,0 +1,25 @@
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropzone p {
+  color: #999;
+  text-align: center;
+}
+
+.dropzone-title {
+  margin: 50px
+}
+
+.dropzone-title h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.dropzone-title h2 {
+  text-align: center;
+  font-size: 1.0em;
+}

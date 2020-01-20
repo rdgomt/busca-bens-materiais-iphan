@@ -1,0 +1,76 @@
+{
+  "env": { "browser": true, "node": true, "es6": true },
+  "globals": { "__DEV__": true },
+  "extends": ["react-app", "airbnb"],
+  "plugins": ["eslint-plugin-import-helpers"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "ignore",
+        "groups": [
+          "/^react$/",
+          "/^react-dom$/",
+          "/^react-redux$/",
+          "/^react-router$/",
+          "/^react-router-dom$/",
+          "/^redux$/",
+          "/^redux-saga$/",
+          "/^redux-saga/effects$/",
+          "module",
+          "/^./",
+          "/^components//",
+          "/^config//",
+          "/^store//",
+          "/^constants//",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unused-state": "warn",
+    "import/order": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+    "no-unused-vars": "warn",
+    "linebreak-style": "off",
+    "semi": "off",
+    "global-require": "off",
+    "no-console": "off",
+    "no-use-before-define": "off",
+    "arrow-parens": "off",
+    "object-curly-newline": "off",
+    "no-underscore-dangle": "off",
+    "no-shadow": "off",
+    "no-nested-ternary": "off",
+    "no-return-assign": "off"
+  }
+}
