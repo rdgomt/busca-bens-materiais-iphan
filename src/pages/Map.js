@@ -87,7 +87,7 @@ class Map extends Component {
         inputLayerBounds._northEast.lat,
       ]
 
-      bensMateriais = L.geoJSON.ajax(`${BENS_MATERIAIS_IPHAN}&CQL_FILTER=BBOX(ponto, ${bounds})`, {
+      bensMateriais = L.geoJSON.ajax(`https://cors-anywhere.herokuapp.com/${BENS_MATERIAIS_IPHAN}&CQL_FILTER=BBOX(ponto, ${bounds})`, {
         title: 'Bens Materiais (IPHAN)',
         style: new L.SLDStyler().getStyleFunction(),
         pointToLayer: (feature, latlng) => new L.marker(latlng, {}),
@@ -97,11 +97,8 @@ class Map extends Component {
       bensMateriais.on('data:loaded', () => {
         const count = bensMateriais.getLayers().length
         if (count > 0) {
-          window.alert(`${count} feições encontradas para a área de estudo.`)
           bensMateriais.addTo(map)
           layerControl.addOverlay(bensMateriais, 'Bens Materiais (IPHAN)')
-        } else {
-          window.alert('Nenhuma feição encontrada para a área de estudo.')
         }
       })
 
