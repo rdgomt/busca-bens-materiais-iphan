@@ -23,6 +23,7 @@
           "/^react-redux$/",
           "/^react-router$/",
           "/^react-router-dom$/",
+          "/^react-$/",
           "/^redux$/",
           "/^redux-saga$/",
           "/^redux-saga/effects$/",

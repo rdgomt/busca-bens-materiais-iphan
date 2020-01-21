@@ -1,6 +1,7 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, put, call, all } from 'redux-saga/effects'
 import { kml } from '@tmcw/togeojson'
 import { Types } from 'store/ducks/inputFile'
+import { notifyError, notifySuccess } from 'utils/notify'
 
 const readFile = file => new Promise((resolve, reject) => {
   const reader = new FileReader()
@@ -14,9 +15,23 @@ function* load(action) {
     const file = yield call(readFile, action.payload[0])
     const xml = new DOMParser().parseFromString(file, 'text/xml')
     const geojson = kml(xml)
-    yield put({ type: Types.LOAD_FILE_SUCCEEDED, payload: geojson })
+    let dataIsValid = true
+    yield all(geojson.features.map(feature => {
+      if (feature.geometry.type !== 'Polygon') {
+        dataIsValid = false
+      }
+      return null
+    }))
+    if (dataIsValid) {
+      yield put({ type: Types.LOAD_FILE_SUCCEEDED, payload: geojson })
+      yield notifySuccess('Arquivo importado com sucesso.')
+    } else {
+      yield notifyError('Importe um KML com um ou mais polígonos.')
+      yield put({ type: Types.LOAD_FILE_FAILED, payload: 'Importe um KML com um ou mais polígonos.' })
+    }
   } catch (err) {
-    yield put({ type: Types.LOAD_FILE_FAILED, payload: 'Erro ao carregar arquivo.' })
+    yield notifyError('Erro ao importar arquivo. Tente novamente.')
+    yield put({ type: Types.LOAD_FILE_FAILED, payload: 'Erro ao importar arquivo. Tente novamente.' })
   }
 }
 
