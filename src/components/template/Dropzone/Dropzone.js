@@ -44,6 +44,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ load }, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(Dropzone)
 
 const baseStyle = {
+  cursor: 'pointer',
   width: '500px',
   padding: '25px 50px',
   borderWidth: 2,
