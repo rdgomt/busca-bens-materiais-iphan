@@ -18,6 +18,8 @@ import 'leaflet-hash'
 import 'leaflet.markercluster/dist/leaflet.markercluster'
 import 'leaflet.markercluster/dist/MarkerCluster.css'
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
+import 'leaflet-extra-markers/dist/js/leaflet.extra-markers.min'
+import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
 
 // Import leaflet default marker icon properly
 delete L.Icon.Default.prototype._getIconUrl
@@ -94,7 +96,8 @@ class Map extends Component {
       bensMateriais = L.geoJSON.ajax(`https://cors-anywhere.herokuapp.com/${BENS_MATERIAIS_IPHAN}&CQL_FILTER=BBOX(ponto, ${bounds})`, {
         title: 'Bens Materiais (IPHAN)',
         pointToLayer: (feature, latlng) => {
-          return L.circleMarker(latlng, this.getStyleForPoints(feature))
+          /* return L.circleMarker(latlng, this.getStyleForPoints(feature)) */
+          return L.marker(latlng, this.getStyleForPoints(feature))
         },
         onEachFeature,
       })
@@ -191,11 +194,11 @@ class Map extends Component {
 
   getStyleForPoints = feature => {
     switch (feature.properties.codigo_iphan) {
-      case 'BA': return { color: "red" }
-      case 'BI': return { color: "green" }
-      case 'BM': return { color: "purple" }
-      case 'PS': return { color: "orange" }
-      default: return { color: "blue" }
+      case 'BA': return { icon: redMarker }
+      case 'BI': return { icon: redMarker }
+      case 'BM': return { icon: redMarker }
+      case 'PS': return { icon: redMarker }
+      default: return { icon: redMarker }
     }
   }
 
@@ -210,6 +213,13 @@ class Map extends Component {
 
 const mapStateToProps = state => ({ inputFile: state.inputFile })
 export default connect(mapStateToProps)(Map)
+
+const redMarker = L.ExtraMarkers.icon({
+  icon: 'fa-coffee',
+  markerColor: 'red',
+  shape: 'square',
+  prefix: 'fa'
+})
 
 const BENS_MATERIAIS_IPHAN = 'http://portal.iphan.gov.br/geoserver/SICG/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=SICG:tg_bem_classificacao&outputFormat=application%2Fjson'
 const ESRI_SAT_LAYER = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
