@@ -24,7 +24,6 @@ function* load(action) {
     }))
     if (dataIsValid) {
       yield put({ type: Types.LOAD_FILE_SUCCEEDED, payload: geojson })
-      yield notifySuccess('Arquivo importado com sucesso.')
     } else {
       yield notifyError('Importe um KML com um ou mais polígonos.')
       yield put({ type: Types.LOAD_FILE_FAILED, payload: 'Importe um KML com um ou mais polígonos.' })

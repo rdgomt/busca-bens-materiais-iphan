@@ -79,6 +79,7 @@ class Map extends Component {
           fillOpacity: 0.1,
         }
       }).addTo(map)
+      layerControl.addOverlay(inputLayer, 'Camada de entrada')
       const inputLayerBounds = inputLayer.getBounds()
       const bounds = [
         inputLayerBounds._southWest.lng,
