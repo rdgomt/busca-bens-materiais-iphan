@@ -5,7 +5,6 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'pages/Map.css'
 import 'leaflet-ajax'
-import 'libs/leaflet-sld/leaflet-sld'
 import 'leaflet-measure/dist/leaflet-measure.pt_BR'
 import 'leaflet-measure/dist/leaflet-measure.css'
 import 'leaflet.defaultextent/dist/leaflet.defaultextent'
@@ -16,6 +15,9 @@ import 'leaflet.utm'
 import 'leaflet-minimap/dist/Control.MiniMap.min'
 import 'leaflet-minimap/dist/Control.MiniMap.min.css'
 import 'leaflet-hash'
+import 'leaflet.markercluster/dist/leaflet.markercluster'
+import 'leaflet.markercluster/dist/MarkerCluster.css'
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 
 // Import leaflet default marker icon properly
 delete L.Icon.Default.prototype._getIconUrl
@@ -72,11 +74,12 @@ class Map extends Component {
     if (geojson && geojson.features !== null) {
       inputLayer = L.geoJSON(geojson, {
         style: {
-          color: 'green',
-          fillColor: 'green',
-          weight: 1.5,
-          opacity: 0.8,
-          fillOpacity: 0.1,
+          color: 'black',
+          weight: 2,
+          opacity: 1,
+          fillOpacity: 0.07,
+          fillColor: 'black',
+          dashArray: '5, 5',
         }
       }).addTo(map)
       layerControl.addOverlay(inputLayer, 'Camada de entrada')
@@ -90,16 +93,19 @@ class Map extends Component {
 
       bensMateriais = L.geoJSON.ajax(`https://cors-anywhere.herokuapp.com/${BENS_MATERIAIS_IPHAN}&CQL_FILTER=BBOX(ponto, ${bounds})`, {
         title: 'Bens Materiais (IPHAN)',
-        style: new L.SLDStyler().getStyleFunction(),
-        pointToLayer: (feature, latlng) => new L.marker(latlng, {}),
+        pointToLayer: (feature, latlng) => {
+          return L.circleMarker(latlng, this.getStyleForPoints(feature))
+        },
         onEachFeature,
       })
 
       bensMateriais.on('data:loaded', () => {
         const count = bensMateriais.getLayers().length
         if (count > 0) {
-          bensMateriais.addTo(map)
-          layerControl.addOverlay(bensMateriais, 'Bens Materiais (IPHAN)')
+          const markers = L.markerClusterGroup()
+          markers.addLayer(bensMateriais)
+          map.addLayer(markers)
+          layerControl.addOverlay(markers, 'Bens Materiais (IPHAN)')
         }
       })
 
@@ -181,6 +187,16 @@ class Map extends Component {
           `
       }
     })
+  }
+
+  getStyleForPoints = feature => {
+    switch (feature.properties.codigo_iphan) {
+      case 'BA': return { color: "red" }
+      case 'BI': return { color: "green" }
+      case 'BM': return { color: "purple" }
+      case 'PS': return { color: "orange" }
+      default: return { color: "blue" }
+    }
   }
 
   render() {
