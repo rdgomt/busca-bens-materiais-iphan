@@ -15,6 +15,13 @@
 	padding: 0px 5px;
 }
 
+.leaflet-container {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Popup */
 .leaflet-popup-content-wrapper {
   border-radius: 5px;
@@ -72,7 +79,10 @@
 .map-control-scalebar {
   bottom: 18px;
 }
-.leaflet-control-measure h3 {
-  font-size: 12px;
-  font-weight: 500;
+
+@media only screen and (max-width: 600px) {
+  #coordenadas,
+  .leaflet-control-minimap {
+    display: none;
+  }
 }

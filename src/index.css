@@ -1,8 +1,6 @@
 * {
   box-sizing: border-box;
   border-collapse: collapse;
-  font-family: 'Roboto', sans-serif;
-  font-size: 1em;
 }
 
 body {
@@ -12,11 +10,12 @@ body {
 	margin: 0;
 	display: flex;
   flex-direction: row;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 a:focus,
@@ -29,6 +28,13 @@ input:focus {
 
 a, p, h1, h2, h3, h4, ul, code {
   color: #333333;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-bottom: 16px;
 }
 
 ul {
@@ -43,6 +49,7 @@ ul {
 	height: 100vh;
   background-color: #f2f2f2;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

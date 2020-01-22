@@ -3,6 +3,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 25px;
+}
+
+.dropzone .logo {
+  margin-bottom: 75px;
 }
 
 .dropzone p {
@@ -11,7 +16,7 @@
 }
 
 .dropzone-title {
-  margin: 50px
+  margin-bottom: 50px;
 }
 
 .dropzone-title h1 {

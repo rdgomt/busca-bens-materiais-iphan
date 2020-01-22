@@ -1,6 +1,6 @@
 {
   "name": "busca-bens-materiais-iphan",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -25,6 +25,7 @@
     "@testing-library/react": "9.3.2",
     "@testing-library/user-event": "7.1.2",
     "@tmcw/togeojson": "^3.2.0",
+    "@turf/bbox": "^6.0.1",
     "@turf/invariant": "^6.1.2",
     "connected-react-router": "^6.6.1",
     "geojson-dissolve": "^3.1.0",
@@ -33,7 +34,7 @@
     "leaflet-extra-markers": "^1.1.0",
     "leaflet-graphicscale": "0.0.2",
     "leaflet-hash": "^0.2.1",
-    "leaflet-measure": "^3.1.0",
+    "leaflet-measure": "github:rdgomt/leaflet-measure",
     "leaflet-minimap": "^3.6.1",
     "leaflet.defaultextent": "0.0.3",
     "leaflet.markercluster": "^1.4.1",

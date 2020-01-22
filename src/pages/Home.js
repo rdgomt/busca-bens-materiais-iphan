@@ -1,17 +1,38 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import Dropzone from 'components/template/Dropzone/Dropzone'
+import Header from 'components/template/Header/Header'
+import Spinner from 'components/template/Spinner/Spinner'
 import MapContainer from 'pages/Map'
 
 const Home = props => {
-  const { geojson } = props.inputFile
+  const inputFileIsLoading = props.inputFile.loading
+  const inputFileGeojson = props.inputFile.geojson
+  const intersectDataIsLoading = props.intersectData.loading
+  const intersectDataGeojson = props.intersectData.data
+
+  if (inputFileIsLoading || intersectDataIsLoading) {
+    return (
+      <Spinner />
+    )
+  }
+
+  if (inputFileGeojson && intersectDataGeojson) {
+    return (
+      <>
+        <Header />
+        <MapContainer />
+      </>
+    )
+  }
 
   return (
-    geojson ? <MapContainer /> : <Dropzone />
+    <Dropzone />
   )
 }
 
-const mapStateToProps = state => ({ inputFile: state.inputFile })
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch)
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+const mapStateToProps = state => ({
+  inputFile: state.inputFile,
+  intersectData: state.intersectData,
+})
+export default connect(mapStateToProps)(Home)

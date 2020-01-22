@@ -21,6 +21,7 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   geojson: null,
+  bounds: null,
 }
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -35,7 +36,8 @@ export default function reducer(state = INITIAL_STATE, action) {
         ...state,
         loading: false,
         error: null,
-        geojson: action.payload,
+        geojson: action.payload.geojson,
+        bounds: action.payload.bounds,
       }
     case Types.LOAD_FILE_FAILED:
       return {

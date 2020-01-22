@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import logo from 'assets/img/logo-completa.png'
 import { useDropzone } from 'react-dropzone'
 import { load } from 'store/ducks/inputFile'
 import 'components/template/Dropzone/Dropzone.css'
@@ -23,17 +24,20 @@ const Dropzone = props => {
 
   return (
     <div className="dropzone">
+      <div className="logo">
+        <img src={logo} alt="Situs Arqueologia" height={60} />
+      </div>
       <div className="dropzone-title">
         <h1>
-          Consulta de Bens Materiais cadastrados no IPHAN
+          Consulta de dados do Patrimônio Cultural Brasileiro
         </h1>
         <h2>
-          Importe um arquivo KML com os limites do empreendimento
+          Inicie importando um arquivo com os limites da área de interesse
         </h2>
       </div>
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Clique para selecionar ou arraste um arquivo KML</p>
+        <p>Clique para selecionar</p>
       </div>
     </div>
   )
@@ -45,7 +49,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Dropzone)
 
 const baseStyle = {
   cursor: 'pointer',
-  width: '500px',
+  maxWidth: '500px',
   padding: '25px 50px',
   borderWidth: 2,
   borderRadius: 6,
@@ -53,7 +57,6 @@ const baseStyle = {
   borderStyle: 'dashed',
   backgroundColor: '#fff',
   outline: 'none',
-  boxShadow: '1px 1px 10px #00000015',
   transition: 'border .24s ease-in-out',
 }
 
