@@ -1,21 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import 'components/template/Header/Header.css'
-import logo from 'assets/img/logo.png'
+import logo from 'assets/img/logo-completa.png'
 
 export default () => (
   <div id="header">
-    <Link to="/">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}
+    >
       <div className="logo">
-        <img src={logo} alt="Situs Arqueologia" height={20} />
+        <a href="https://www.situsarqueologia.com.br/" target="_blank" rel="noopener noreferrer">
+          <img src={logo} alt="Situs Arqueologia" height={30} />
+        </a>
       </div>
-    </Link>
-    <div className="title-center">
-      <text style={{ fontWeight: 500, fontSize: 14 }}>
-        Patrimônio Cultural Brasileiro
-      </text>
+      <div>
+        <text style={{ fontWeight: 400, fontSize: 14 }}>
+          Patrimônio Cultural
+        </text>
+      </div>
     </div>
-    <div />
+
     <button className="button" type="button" onClick={() => window.location.reload()}>
       Nova consulta
     </button>

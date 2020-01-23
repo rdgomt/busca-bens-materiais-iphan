@@ -24,9 +24,11 @@ const Dropzone = props => {
 
   return (
     <div className="dropzone">
-      <div className="logo">
-        <img src={logo} alt="Situs Arqueologia" height={60} />
-      </div>
+      <a href="https://www.situsarqueologia.com.br/" target="_blank" rel="noopener noreferrer">
+        <div className="logo">
+          <img src={logo} alt="Situs Arqueologia" height={60} />
+        </div>
+      </a>
       <div className="dropzone-title">
         <h1>
           Consulta de dados do Patrimônio Cultural Brasileiro
