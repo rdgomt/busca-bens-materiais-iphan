@@ -88,6 +88,12 @@
   cursor: pointer;
 }
 
+/* Measure */
+.leaflet-control-measure h3 {
+  font-size: 13px;
+  font-weight: 500;
+}
+
 @media only screen and (max-width: 600px) {
   #coordenadas,
   .leaflet-control-minimap {

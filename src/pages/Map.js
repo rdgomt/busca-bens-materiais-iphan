@@ -81,11 +81,9 @@ class Map extends Component {
     LAYERS_CONTROL.addOverlay(BENS_IMATERIAIS_CLUSTER, 'Bens Imateriais (IPHAN)')
 
     LAYERS_CONTROL.addTo(map)
-
+    ZOOM_CONTROL.addTo(map)
     MINIMAP_CONTROL.addTo(map)
-
     MEASURE_CONTROL.addTo(map)
-
     GRAPHIC_SCALE_CONTROL.addTo(map)
     let graphicScaleControlContainer = GRAPHIC_SCALE_CONTROL.getContainer()
     graphicScaleControlContainer.style.bottom = '8px'
@@ -174,9 +172,10 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps)(Map)
 
 const MAP_OPTIONS = {
-  center: [-15.045974, -48.228085],
+  center: [-16, -48],
   zoom: 5,
   maxZoom: 17,
+  zoomControl: false
 }
 const INPUT_LAYER_STYLE = {
   color: 'black',
@@ -205,6 +204,7 @@ const LAYERS_CONTROL = L.control.layers({
   "OpenStreetMap": OSM_LAYER,
   "Satélite": ESRI_SAT_LAYER,
 }, {}, { collapsed: true, position: 'topright' })
+const ZOOM_CONTROL = L.control.zoom({ position: 'topright' })
 const MINIMAP_CONTROL = new L.Control.MiniMap(OSM_LAYER_MINIMAP, {
   width: 125,
   height: 125,
@@ -219,7 +219,7 @@ const MINIMAP_CONTROL = new L.Control.MiniMap(OSM_LAYER_MINIMAP, {
   },
 })
 const MEASURE_CONTROL = new L.Control.Measure({
-  position: 'topleft',
+  position: 'topright',
   primaryLengthUnit: 'meters',
   secondaryLengthUnit: 'kilometers',
   primaryAreaUnit: 'sqmeters',

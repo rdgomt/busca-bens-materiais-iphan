@@ -24,13 +24,13 @@
   background-color: #f2f2f2;
   border: none;
   padding: 5px 10px;
-  transition: all 0.3s;
+  transition: all 0.2s;
   color: #666666;
 }
 #header .button:hover {
   background-color: #e6e6e6;
   color: #4d4d4d;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 @media only screen and (max-width: 600px) {
