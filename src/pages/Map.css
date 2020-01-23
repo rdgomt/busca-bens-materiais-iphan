@@ -75,9 +75,17 @@
   background-color: #f9f9f9;
 }
 
-/* Controls */
+/* Scale bar */
 .map-control-scalebar {
   bottom: 18px;
+}
+.leaflet-control-graphicscale-inner {
+  font-size: 10px;
+}
+
+/* Context menu */
+.leaflet-contextmenu a.leaflet-contextmenu-item {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {

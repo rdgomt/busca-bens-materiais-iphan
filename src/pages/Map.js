@@ -23,6 +23,8 @@ import 'leaflet.markercluster/dist/MarkerCluster.css'
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css'
 import 'leaflet-extra-markers/dist/js/leaflet.extra-markers.min'
 import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
+import 'leaflet-contextmenu/dist/leaflet.contextmenu.min'
+import 'leaflet-contextmenu/dist/leaflet.contextmenu.min.css'
 import 'pages/Map.css'
 
 class Map extends Component {
@@ -30,7 +32,28 @@ class Map extends Component {
     const { geojson } = this.props.inputFile
     const { data } = this.props.intersectData
 
-    const map = new L.map('map', MAP_OPTIONS)
+    const showCoordinates = (e) => {
+      alert(
+        `LatLng: ${(e.latlng.lat).toFixed(6)}, ${(e.latlng.lng).toFixed(6)} (WGS84)\nUTM: ${e.latlng.utm().toString({ decimals: 3, format: '{x}{sep} {y} ({zone}{band})' })}`
+      )
+    }
+
+    const centerMap = (e) => {
+      map.panTo(e.latlng)
+    }
+
+    const map = new L.map('map', {
+      ...MAP_OPTIONS,
+      contextmenu: true,
+      contextmenuWidth: 140,
+      contextmenuItems: [{
+        text: 'Mostrar coordenadas',
+        callback: showCoordinates
+      }, {
+        text: 'Centralizar mapa',
+        callback: centerMap
+      }],
+    })
 
     OSM_LAYER.addTo(map)
 
@@ -98,7 +121,6 @@ class Map extends Component {
       default: return { icon: RED_MARKER }
     }
   }
-
 
   onEachFeature = (feature, layer) => {
     layer.on({
