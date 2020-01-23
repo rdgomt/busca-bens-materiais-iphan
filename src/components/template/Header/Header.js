@@ -16,12 +16,8 @@ export default () => (
       </text>
     </div>
     <div />
-    <Link to="/" className="new-search">
-      <div>
-        <text style={{ fontSize: 14 }}>
-          Nova consulta
-        </text>
-      </div>
-    </Link>
+    <button className="button" type="button" onClick={() => window.location.reload()}>
+      Nova consulta
+    </button>
   </div>
 )
