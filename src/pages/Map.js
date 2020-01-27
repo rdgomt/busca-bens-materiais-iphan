@@ -39,8 +39,10 @@ class Map extends Component {
     window.exportIntersectData = exportIntersectData
 
     const sidebarDiv = document.getElementById('sidebar')
-    sidebarDiv.innerHTML =
+    sidebarDiv.innerHTML +=
       `
+        <br />
+        <h3>Total:</h3>
         <p>Bens Materiais: ${bensMateriaisTotal}</p>
         <p>Bens Imateriais: ${bensImateriaisTotal}</p>
       `
@@ -175,7 +177,29 @@ class Map extends Component {
   render() {
     return (
       <div id="map">
-        <div id="sidebar" />
+        <div id="sidebar">
+          <h3>Legenda:</h3>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div className="legend-symbol" style={{ backgroundColor: '#9D282D' }} />
+            <p>Bem Arqueológico</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div className="legend-symbol" style={{ backgroundColor: '#EF9228' }} />
+            <p>Bem Imóvel</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div className="legend-symbol" style={{ backgroundColor: '#116FB8' }} />
+            <p>Bem Móvel ou Integrado</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div className="legend-symbol" style={{ backgroundColor: '#90278d' }} />
+            <p>Bem Paisagístico</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <div className="legend-symbol" style={{ backgroundColor: '#009345' }} />
+            <p>Bem Imaterial</p>
+          </div>
+        </div>
         <div id="coordenadas" />
       </div>
     )
@@ -199,7 +223,7 @@ const INPUT_LAYER_STYLE = {
   color: 'black',
   weight: 2,
   opacity: 1,
-  fillOpacity: 0.07,
+  fillOpacity: 0,
   fillColor: 'black',
   dashArray: '5, 5',
 }
