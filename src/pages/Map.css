@@ -15,6 +15,26 @@
 	padding: 0px 5px;
 }
 
+#sidebar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 9999;
+  background-color: white;
+  border: 2px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+  cursor: default;
+}
+#sidebar a {
+  color: #0078A8;
+  text-decoration: none;
+}
+#sidebar a:hover {
+  text-decoration: underline;
+}
+
 .leaflet-container {
   font-weight: normal;
   font-size: 12px;

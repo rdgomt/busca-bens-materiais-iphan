@@ -1,4 +1,6 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, put, call, select } from 'redux-saga/effects'
+import ExcelJS from 'exceljs'
+import { saveAs } from 'file-saver'
 import { Types } from 'store/ducks/intersectData'
 import { notifyError } from 'utils/notify'
 
@@ -75,8 +77,74 @@ function* fetchIntersectData(action) {
   }
 }
 
+const createWorkbookFile = async workbook => {
+  try {
+    const data = await workbook.xlsx.writeBuffer()
+    const blob = new Blob([data], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    })
+    saveAs(blob, 'SitusArqueologia.xlsx')
+  } catch (err) {
+    console.tron.log('err', err)
+  }
+}
+
+function* exportIntersectData() {
+  const data = yield select(state => state.intersectData.data)
+  const bensMateriaisTotal = data.bensMateriais.features.length
+  const bensImateriaisTotal = data.bensImateriais.points.features.length
+
+  const workbook = new ExcelJS.Workbook()
+  workbook.creator = 'Situs Arqueologia'
+
+  if (bensMateriaisTotal > 0) {
+    const bensMateriaisSheet = workbook.addWorksheet('Bens Materiais')
+    const keys = [
+      ...Object.keys(data.bensMateriais.features[0].properties),
+      'latitude',
+      'longitude',
+    ]
+    const columns = keys.map(key => ({
+      header: key,
+      key,
+      width: 25,
+    }))
+    bensMateriaisSheet.columns = columns
+    const rows = data.bensMateriais.features.map(feature => ({
+      ...feature.properties,
+      latitude: feature.geometry.coordinates[1],
+      longitude: feature.geometry.coordinates[0],
+    }))
+    bensMateriaisSheet.addRows(rows)
+  }
+
+  if (bensImateriaisTotal > 0) {
+    const bensImateriaisSheet = workbook.addWorksheet('Bens Imateriais')
+    const keys = [
+      ...Object.keys(data.bensImateriais.points.features[0].properties),
+      'latitude',
+      'longitude',
+    ]
+    const columns = keys.map(key => ({
+      header: key,
+      key,
+      width: 25,
+    }))
+    bensImateriaisSheet.columns = columns
+    const rows = data.bensImateriais.points.features.map(feature => ({
+      ...feature.properties,
+      latitude: feature.geometry.coordinates[1],
+      longitude: feature.geometry.coordinates[0],
+    }))
+    bensImateriaisSheet.addRows(rows)
+  }
+
+  yield call(createWorkbookFile, workbook)
+}
+
 export const intersectDataSagas = [
   takeLatest(Types.FETCH_INTERSECT_DATA_REQUESTED, fetchIntersectData),
+  takeLatest(Types.EXPORT_INTERSECT_DATA_REQUESTED, exportIntersectData),
 ]
 
 const CORS_PREFIX = 'https://cors-anywhere.herokuapp.com/'

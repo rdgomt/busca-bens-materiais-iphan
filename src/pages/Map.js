@@ -5,7 +5,9 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import L from 'leaflet'
+import { exportIntersectData } from 'store/ducks/intersectData'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-ajax'
 import 'leaflet-measure/dist/leaflet-measure.pt_BR'
@@ -31,6 +33,20 @@ class Map extends Component {
   componentDidMount() {
     const { geojson } = this.props.inputFile
     const { data } = this.props.intersectData
+    const bensMateriaisTotal = data.bensMateriais.features.length
+    const bensImateriaisTotal = data.bensImateriais.points.features.length
+    const { exportIntersectData } = this.props
+    window.exportIntersectData = exportIntersectData
+
+    const sidebarDiv = document.getElementById('sidebar')
+    sidebarDiv.innerHTML =
+      `
+        <p>Bens Materiais: ${bensMateriaisTotal}</p>
+        <p>Bens Imateriais: ${bensImateriaisTotal}</p>
+      `
+    if (bensMateriaisTotal > 0 || bensImateriaisTotal > 0) {
+      sidebarDiv.innerHTML += `<br /><p style="cursor: pointer;" onClick="exportIntersectData()"><a>Exportar dados</a></p>`
+    }
 
     const showCoordinates = (e) => {
       alert(
@@ -159,6 +175,7 @@ class Map extends Component {
   render() {
     return (
       <div id="map">
+        <div id="sidebar" />
         <div id="coordenadas" />
       </div>
     )
@@ -169,7 +186,8 @@ const mapStateToProps = state => ({
   inputFile: state.inputFile,
   intersectData: state.intersectData,
 })
-export default connect(mapStateToProps)(Map)
+const mapDispatchToProps = dispatch => bindActionCreators({ exportIntersectData }, dispatch)
+export default connect(mapStateToProps, mapDispatchToProps)(Map)
 
 const MAP_OPTIONS = {
   center: [-16, -48],
@@ -203,7 +221,7 @@ const OSM_LAYER_MINIMAP = L.tileLayer(OSM_URL)
 const LAYERS_CONTROL = L.control.layers({
   "OpenStreetMap": OSM_LAYER,
   "Satélite": ESRI_SAT_LAYER,
-}, {}, { collapsed: true, position: 'topright' })
+}, {}, { collapsed: false, position: 'topright' })
 const ZOOM_CONTROL = L.control.zoom({ position: 'topright' })
 const MINIMAP_CONTROL = new L.Control.MiniMap(OSM_LAYER_MINIMAP, {
   width: 125,
