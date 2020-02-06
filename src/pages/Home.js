@@ -4,6 +4,7 @@ import Dropzone from 'components/template/Dropzone/Dropzone'
 import Header from 'components/template/Header/Header'
 import Spinner from 'components/template/Spinner/Spinner'
 import MapContainer from 'pages/Map'
+import homeBgImg from 'assets/img/home-bg.png'
 
 const Home = props => {
   const inputFileIsLoading = props.inputFile.loading
@@ -27,7 +28,24 @@ const Home = props => {
   }
 
   return (
-    <Dropzone />
+    <>
+      <Dropzone />
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          backgroundImage: `url(${homeBgImg})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          width: '100vw',
+          height: '100vh',
+          opacity: 0.4,
+          zIndex: 0,
+        }}
+      />
+    </>
   )
 }
 

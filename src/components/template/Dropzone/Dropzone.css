@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   margin: 25px;
+  z-index: 1;
 }
 
 .dropzone .logo {
@@ -16,7 +17,7 @@
 }
 
 .dropzone-title {
-  margin-bottom: 50px;
+  margin-bottom: 75px;
 }
 
 .dropzone-title h1 {
