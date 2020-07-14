@@ -1,39 +1,39 @@
-
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/67931677/87466369-81de3a80-c5ec-11ea-936d-a7100f44ca50.png
-" width="70" />
+  <img src="https://github.com/rdgomt/busca-bens-materiais-iphan/blob/master/public/favicon.png" width="70" />
 </p>
 <p align="center">
   <i>
-For development, you will only need Node.js and Create React App.
- <a href="http://busca-bens-materiais-iphan.herokuapp.com/">http://busca-bens-materiais-iphan.herokuapp.com/</a>.</i>
+  Aplicação web que permite pesquisar e baixar dados sobre o patrimônio cultural brasileiro
+ <a href="http://busca-bens-materiais-iphan.herokuapp.com/">Busca Bens Materiais Iphan</a>.</i>
   <br/>
-  <img src="https://user-images.githubusercontent.com/67931677/87430226-49723880-c5bb-11ea-85a3-dee440e73fc4.png" width="800" />
+  <img src="https://github.com/rdgomt/busca-bens-materiais-iphan/blob/master/public/screenshot.png" width="800" />
 </p>
 
-
 ---
-## Requirements
 
-For development, you will only need Node.js and Create React App.
+## Requerimentos
+
+Para desenvolvimento, você precisará apenas do Node.js e do Create React App.
 
 ### Node
-- #### Node installation on Windows
 
-  Just go on [official Node.js website](https://nodejs.org/) and download the installer.
-Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
+* #### Instalação do Node no Windows
 
-- #### Node installation on Ubuntu
+  Basta acessar[Website oficial do Node.js](https://nodejs.org/) e fazer o download do instalado.
+Alem disso, certifique-se de ter o `git` , o `npm` poderá ultiliar ele (Você pode encontrar [aqui](https://git-scm.com/)).
+
+* #### Instalação do Node no Ubuntu
 
   You can install nodejs and npm easily with apt install, just run the following commands.
 
       $ sudo apt install nodejs
       $ sudo apt install npm
 
-- #### Other Operating Systems
-  You can find more information about the installation on the [official Node.js website](https://nodejs.org/) and the [official NPM website](https://npmjs.org/).
+* #### Outros Sistemas Operacionais
 
-If the installation was successful, you should be able to run the following command.
+Você pode encontrar mais informações sobre a instalação website oficial do [Node.js](https://nodejs.org/) e do [NPM](https://npmjs.org/).
+
+Se a instalação foi feita com sucesso, você poderá executar o seguinte comando para verificação das versões.
 
     $ node --version
     v10.19.0
@@ -41,19 +41,16 @@ If the installation was successful, you should be able to run the following comm
     $ npm --version
     6.14.4
 
-
 ###
 
 ---
 
-## Install
+## Copiar o Repositório
 
     $ git clone https://github.com/rdgomt/busca-bens-materiais-iphan
     $ cd busca-bens-materiais-iphan
+
+## Rodar o Projeto
+
     $ npm i create-react-app
-
-
-## Running the project
-
     $ npm start
-
