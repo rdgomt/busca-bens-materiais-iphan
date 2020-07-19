@@ -145,6 +145,30 @@ class Map extends Component {
       }
     })
 
+
+    let label = {
+      "id_bem": "Id do Bem",
+      "identificacao_bem": "Indentificação do Bem",
+      "co_iphan": "Códido do IPHAN",
+      "no_logradouro": "Nome do Logradouro",
+      "nu_logradouro": "Número do Logradouro",
+      "id_natureza": "Id Natureza",
+      "ds_natureza": "Descrição da Natureza",
+      "codigo_iphan": "Código do IPHAN",
+      "id_classificacao": "Id de Clasificação",
+      "ds_classificacao": "Descrição de Clasificação",
+      "dt_cadastro": "Data de Cadastro",
+      "id_tipo_bem": "Id do Tipo de Bem",
+      "ds_tipo_bem": "Descrição do Tipo de Bem",
+      "sg_tipo_bem": "Segmento de Bem",
+      "sintese_bem": "Sintese de Bem"
+    }
+
+
+
+
+
+
     // Conteúdo da popUp ao selecionar feições
     let popupContent = `
       <h3 class="layer-title">Patrimônio Cultural (IPHAN)</h3>
@@ -157,7 +181,7 @@ class Map extends Component {
         popupContent +=
           `
             <tr class="layer-table">
-              <th class="layer-table">${i}</th>
+              <th class="layer-table">${label[i]}</th>
               <td class="layer-table">
                 ${feature.properties[i] === null ? '' : feature.properties[i]}
               </td>
